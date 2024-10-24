@@ -1,241 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Register</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        background-image: url('https://www.transparenttextures.com/patterns/asfalt-light.png'); /* Light grey textured background */
-        margin: 0;
-        padding: 20px;
-      }
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <style>
+    /* General body and layout settings */
+    body {
+      margin: 0;
+      display: flex;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      background-image: url('https://e1.pxfuel.com/desktop-wallpaper/487/217/desktop-wallpaper-cars-3-movie-lightning-mc-queen-vs-jackson-storm-background-zubhxr-lightning-cars.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      font-family: Arial, sans-serif;
+    }
 
-      /* Header styling */
-      header {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #007bff; /* Blue background */
-        color: white;
-        padding: 15px 20px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-        margin: 0 -20px 20px -20px; /* Stretch the header */
-      }
+    .outer-box {
+      width: 50%; /* Full width of parent */
+      border-radius: 15px;
+      padding: 30px; /* Ensure consistent padding inside */
+      box-sizing: border-box; /* Padding won't affect total width */
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      background-color: rgba(248, 249, 250, 0.9); /* Semi-transparent light gray */
+      margin: 0; /* Remove potential margin issues */
+    }
 
-      /* Centering the Register title */
-      h1 {
-        font-size: 24px;
-        margin: 0;
-        text-align: center;
-        color: white;
-      }
+    .inner-box {
+      width: 100%; /* Full width inside the outer box */
+      overflow-y: auto; /* Scroll when content overflows */
+      max-height: 500px; /* Limit the height to make it scrollable */
+      border: 1px solid rgba(248, 249, 250, 0.9);
+      border-radius: 10px;
+      padding: 10px;
+      box-sizing: border-box;
+      background-color: rgba(248, 249, 250, 0.9); /* Semi-transparent white */
+    }
 
-      form {
-        max-width: 500px;
-        margin: 0 auto;
-        background: #fff;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      }
+    .page-title {
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 10px;
+    }
 
-      label {
-        display: block;
-        margin-bottom: 5px;
-        color: #555;
-      }
+    /* Form inputs and buttons */
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
 
-      input[type="text"],
-      input[type="email"],
-      input[type="password"],
-      input[type="date"],
-      select {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 15px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        font-size: 16px;
-      }
+    .phone-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
 
-      button {
-        width: 100%;
-        padding: 10px;
-        background-color: #28a745;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-      }
+    .phone-container button {
+      margin-left: 10px;
+      width: 30px; /* Square button */
+      height: 30px;
+      background-color: #3953a9;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 16px;
+      padding: 0; /* Remove default padding */
+    }
 
-      button:hover {
-        background-color: #218838;
-      }
+    .remove-button {
+      background-color: #FF4C4C;
+    }
 
-      /* Phone entry field styling */
-      .phone-entry {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
+    .register-button {
+      background-color: #153e6a;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
 
-      .phone-entry input {
-        width: calc(100% - 90px); /* Allow space for the remove button */
-      }
+    .toggle-link {
+      text-align: center;
+      margin-top: 10px;
+    }
 
-      /* Remove button for phone number input */
-      .phone-entry button {
-        background-color: #dc3545;
-        color: white;
-        border: none;
-        padding: 6px 12px;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-      }
+    .toggle-link a {
+      color: #007BFF;
+      text-decoration: underline;
+      cursor: pointer;
+    }
 
-      .phone-entry button:hover {
-        background-color: #c82333;
-      }
+    /* Additional styling for the Driver's License input */
+    .driver-license-container {
+      display: none; /* Initially hidden */
+    }
+  </style>
+</head>
+<body>
 
-      /* Responsive adjustments */
-      @media (max-width: 600px) {
-        form {
-          padding: 15px;
-        }
+<div class="outer-box">
+  <div class="inner-box">
+    <div class="page-title">REGISTER</div>
 
-        button {
-          font-size: 14px;
-        }
-      }
-    </style>
-    <script>
-      function toggleFields() {
-        const role = document.getElementById("role").value;
-        const driverLicenseField = document.getElementById(
-          "drivers-license-field"
-        );
+    <div>
+      <input type="text" placeholder="User Name" required>
+      <input type="email" placeholder="Email" required>
+      <input type="password" placeholder="Password" required>
+      <input type="date" placeholder="DOB" required>
+      <input type="text" placeholder="Address" required>
 
-        if (role === "renter") {
-          driverLicenseField.style.display = "block";
-        } else {
-          driverLicenseField.style.display = "none";
-        }
-      }
-
-      // Function to add a new phone number input
-      function addPhoneNumberField() {
-        const phoneList = document.getElementById("phone-list");
-        const newPhoneDiv = document.createElement("div");
-        newPhoneDiv.classList.add("phone-entry");
-
-        newPhoneDiv.innerHTML = `
-          <input type="text" name="Mobile_Number" placeholder="Mobile Number" required />
-          <button type="button" onclick="removePhoneNumberField(this)">Remove</button>
-        `;
-
-        phoneList.appendChild(newPhoneDiv);
-      }
-
-      // Function to remove a phone number input
-      function removePhoneNumberField(button) {
-        button.parentElement.remove();
-      }
-
-      async function registerUser(event) {
-        event.preventDefault(); // Prevent form from submitting the traditional way
-
-        const form = event.target;
-        const formData = new FormData(form);
-
-        const phoneNumbers = [];
-        document
-          .querySelectorAll('input[name="Mobile_Number"]')
-          .forEach((input) => {
-            if (input.value) {
-              phoneNumbers.push(input.value);
-            }
-          });
-
-        const data = {
-          User_Name: formData.get("User_Name"),
-          Email: formData.get("Email"),
-          Pass_word: formData.get("Pass_word"),
-          DOB: formData.get("DOB"),
-          Address: formData.get("Address"),
-          Mobile_Number: phoneNumbers, // Submit all phone numbers as an array
-          role: formData.get("role"), // Get role value
-          DriverLicense: formData.get("DriverLicense") || null, // Get DriverLicense value
-        };
-
-        try {
-          const response = await fetch("/auth/register", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-          });
-
-          if (response.ok) {
-            window.location.href = "/"; // Redirect to index page
-          } else {
-            alert("Registration failed.");
-          }
-        } catch (error) {
-          console.error("Error:", error);
-          alert("An error occurred. Please try again.");
-        }
-      }
-    </script>
-  </head>
-  <body>
-    <header>
-      <h1>Register</h1>
-    </header>
-
-    <form id="registerForm" onsubmit="registerUser(event)">
-      <label for="User_Name">User Name:</label>
-      <input type="text" name="User_Name" id="User_Name" required />
-
-      <label for="Email">Email:</label>
-      <input type="email" name="Email" id="Email" required />
-
-      <label for="Pass_word">Password:</label>
-      <input type="password" name="Pass_word" id="Pass_word" required />
-
-      <label for="DOB">Date of Birth:</label>
-      <input type="date" name="DOB" id="DOB" required />
-
-      <label for="Address">Address:</label>
-      <input type="text" name="Address" id="Address" required />
-
-      <label for="Mobile_Number">Mobile Number(s):</label>
-      <div id="phone-list">
-        <div class="phone-entry">
-          <input type="text" name="Mobile_Number" placeholder="Mobile Number" required />
-        </div>
+      <div class="phone-container" id="phoneContainer">
+        <input type="tel" placeholder="Enter Phone Number(s)" pattern="[0-9]{10}" required>
+        <button onclick="addPhoneNumber()">+</button>
       </div>
-      <button type="button" onclick="addPhoneNumberField()">Add Another Phone Number</button>
 
-      <label for="role">Role:</label>
-      <select name="role" id="role" onchange="toggleFields()" required>
+      <select id="roleSelect" required onchange="toggleDriverLicenseInput()">
+        <option value="" disabled selected>Select Role</option>
         <option value="owner">Owner</option>
         <option value="renter">Renter</option>
       </select>
 
-      <!-- Driver's License Number (Only for Renters) -->
-      <div id="drivers-license-field" style="display: none">
-        <label for="DriverLicense">Driver's License Number:</label>
-        <input type="text" name="DriverLicense" id="DriverLicense" />
+      <!-- Driver's License input, initially hidden -->
+      <div class="driver-license-container" id="driverLicenseContainer">
+        <input type="text" placeholder="Driver's License Number" required>
       </div>
 
-      <button type="submit">Register</button>
-    </form>
-  </body>
+      <button class="register-button">Register</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  let phoneCount = 1;
+
+  function addPhoneNumber() {
+    phoneCount++;
+    const phoneContainer = document.getElementById('phoneContainer');
+
+    const newPhoneField = document.createElement('div');
+    newPhoneField.className = 'phone-container';
+    newPhoneField.innerHTML = `
+      <input type="tel" placeholder="Enter Phone Number ${phoneCount}" pattern="[0-9]{10}">
+      <button class="remove-button" onclick="removePhoneNumber(this)">-</button>
+    `;
+    phoneContainer.parentNode.insertBefore(newPhoneField, phoneContainer.nextSibling);
+  }
+
+  function removePhoneNumber(button) {
+    button.parentElement.remove();
+  }
+
+  function toggleDriverLicenseInput() {
+    const roleSelect = document.getElementById('roleSelect');
+    const driverLicenseContainer = document.getElementById('driverLicenseContainer');
+
+    // Show or hide the Driver's License input based on the selected role
+    if (roleSelect.value === 'renter') {
+      driverLicenseContainer.style.display = 'block';
+    } else {
+      driverLicenseContainer.style.display = 'none';
+    }
+  }
+</script>
+
+</body>
 </html>
+
